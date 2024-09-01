@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content</title>
+    <style>
+        body {
+            background-color: white;
+            color: black;
+        }
+        #warntext {
+            color: red;
+            z-index: -100000000000; /* Consider using a more reasonable z-index */
+        }
+    </style>
+    <script>
+        const ignoredScripts = ['lib/jquery', 'lib/fontselector']; // Add other ignored scripts here
+        const workerDelay = 15
+
+        function createWarningText() {
+            const warnTextElement = document.createElement('div');
+            warnTextElement.id = 'warntext';
+            warnTextElement.textContent = 'Please enable worker JS in enabledjs.json file.';
+            document.body.appendChild(warnTextElement);
+            console.error(warnTextElement.textContent);
+        }
+
+        function loadScripts(scripts, delay = 0) {
+            if (delay) {
+                setTimeout(() => {
+                    scripts.forEach(loadScript);
+                }, delay);
+            } else {
+                scripts.forEach(loadScript);
+            }
+        }
+
+        function loadScript(scriptName) {
+            const script = document.createElement('script');
+            script.src = `${scriptName}.js`;
+            script.onload = () => console.log(`${scriptName}.load()`);
+            document.body.appendChild(script);
+        }
+
+        fetch('enabledjs.json')
+            .then(response => response.json())
+            .then(data => {
+                const libScripts = [];
+                const workerScripts = [];
+                let isAnyEnabled = false;
+
+                data.forEach(item => {
+                    if (item.enabled) {
+                        const scriptName = item.entry;
+                        if (!ignoredScripts.includes(scriptName)) {
+                            isAnyEnabled = true;
+                        }
+                        if (scriptName.startsWith('lib/')) {
+                            libScripts.push(scriptName);
+                        } else if (scriptName.startsWith('worker/')) {
+                            workerScripts.push(scriptName);
+                        }
+                    }
+                });
+
+                loadScripts(libScripts); // Load lib scripts immediately
+                if (workerScripts.length > 0) {
+                    loadScripts(workerScripts, workerDelay); // Load worker scripts with a delay
+                }
+
+                if (!isAnyEnabled) {
+                    createWarningText(); // Create the warning text element
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching enabledjs.json:', error);
+            });
+    </script>
+</head>
+<body>
+</body>
+</html>

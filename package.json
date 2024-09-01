@@ -1,0 +1,13 @@
+{
+  "name": "cs",
+  "version": "3.2.4",
+  "description": "Creative Studio",
+  "main": "server.js",
+  "scripts": {
+    "ss": "python capture.py",
+    "server": "node server.js"
+  },
+  "author": "@true1ann",
+  "license": "GPL-3.0",
+  "dependencies": {}
+}

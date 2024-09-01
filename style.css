@@ -1,0 +1,81 @@
+:root {
+    --background-color: #191e1e; /* Body background color */
+    --control-background-color: #2d3538; /* Control section background color */
+    --control-top-radius: 30px; /* Control top-border roundness */
+    --control-bottom-radius: 15px;
+    --button-background-color: rgba(72, 96, 104, 0.5); /* Button background color */
+    --button-hover-color: rgba(72, 96, 104, 1); /* Button hover color */
+    --button-radius: 5px;
+    --button-active-radius: 15px;
+    --text-color: white; /* Text color */
+    --preview-radius: 25px;
+}
+
+body {
+    background-color: var(--background-color); /* Set body background color */
+    margin: 0;
+    font-family: Arial, sans-serif;
+    overflow: hidden; /* Prevent body scrolling */
+}
+
+#cs-control {
+    background-color: var(--control-background-color); /* Control section background color */
+    color: var(--text-color); /* Text color */
+    padding: 10px;
+    text-align: center;
+    position: relative;
+    border-top-left-radius: var(--control-top-radius);
+    border-top-right-radius: var(--control-top-radius);
+    border-bottom-left-radius: var(--control-bottom-radius);
+    border-bottom-right-radius: var(--control-bottom-radius);
+    max-width: 780px; /* Set a maximum width */
+    margin: 0 auto; /* Center horizontally */
+}
+
+#cs-contentbody {
+    background-color: var(--background-color); /* Content body background color */
+    color: var(--text-color); /* Text color */
+    height: calc(100vh - 75px); /* Adjust height based on control height */
+    overflow: hidden; /* Prevent scrolling in content body */
+    display: flex; /* Use flexbox to center the iframe */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    border-radius: var(--preview-radius);
+}
+
+#cs-contentiframe {
+    border: none; /* Remove default border */
+    box-sizing: border-box; /* Include padding and border in width/height */
+    border-radius: var(--preview-radius);
+}
+
+.cs-item {
+    background-color: var(--button-background-color); /* Button background color */
+    color: var(--text-color); /* Text color */
+    border: none;
+    border-radius: var(--button-radius);
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: 0.25s;
+    margin: 0 5px; /* Add some margin between buttons */
+    display: inline-block;
+}
+
+.cs-item.button:hover {
+    border-radius: var(--button-active-radius);
+    background-color: var(--button-hover-color); /* Button hover color */
+    transition-duration: 0.25s;
+}
+
+.checkbox-input {
+    display: none; /* Hide the default checkbox */
+}
+
+.checkbox-input:checked + .cs-item.checkmark {
+    border-radius: var(--button-active-radius);
+    background-color: var(--button-hover-color);
+}
+
+.checkbox-input:hover + .cs-item.checkmark:hover {
+    background-color: var(--button-hover-color);
+}

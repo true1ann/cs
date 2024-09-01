@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Creative Studio</title>
+    <script>
+        async function loadConfig() {
+            try {
+                const response = await fetch('resconfig.json');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                config = await response.json();
+                setIframeDimensions(); // Set the iframe dimensions based on the loaded config
+            } catch (error) {
+                console.error('Error loading config:', error);
+            }
+        }
+
+        function setIframeDimensions() {
+            const iframe = document.getElementById('cs-contentiframe');
+            if (iframe) {
+                iframe.style.width = `${config.res[0]}px`;
+                iframe.style.height = `${config.res[1]}px`;
+            } else {
+                console.error('Iframe not found');
+            }
+        }
+
+        function refreshPreview() {
+            const iframe = document.getElementById('cs-contentiframe');
+            if (iframe) {
+                iframe.src = iframe.src; // Reload the iframe by resetting its src
+            } else {
+                console.error('Iframe not found');
+            }
+        }
+
+        setInterval(() => {
+            if (document.getElementById('cs-livePreview').checked) {
+                refreshPreview();
+            }
+        }, 1250);
+
+        // Load the configuration when the page loads
+        window.onload = loadConfig;
+    </script>
+</head>
+<body>
+    <div id="cs-contentbody">
+        <iframe title="cs" id="cs-contentiframe" src="content.html"></iframe>
+    </div>
+    <div id="cs-control">
+        <label for="zoom-level" class="cs-item">Zoom Level:</label>
+        <input type="number" id="zoom-level" class="cs-item" value="1.0" step="0.1" min="0.1" max="5.0">
+        <button type="button" onclick="setZoom()" class="cs-item button">Zoom</button>
+        <button type="button" onclick="refreshPreview()" class="cs-item button">Refresh Preview</button>
+        <input type="checkbox" id="cs-livePreview" class="checkbox-input">
+        <label for="cs-livePreview" class="cs-item checkmark">Live Preview</label>
+    </div>
+</body>
+</html>

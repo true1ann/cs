@@ -1,0 +1,8 @@
+[
+    {"entry": "lib/jquery", "enabled": true},
+    {"entry": "lib/fontselector", "enabled": true},
+
+    {"entry": "worker/wordwall", "enabled": true},
+    {"entry": "worker/binaricon", "enabled": false},
+    {"entry": "worker/opengl", "enabled": false}
+]
