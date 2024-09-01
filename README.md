@@ -1,4 +1,6 @@
-
+<p align="center">
+    <img src="cs-banner.png" alt="CS Banner" />
+</p>
 # Creative Studio (v3)
 
 Creative Studio is a user-friendly tool designed for coding JavaScript web-based graphics. Its primary goal is to facilitate quick switching between different JavaScript 'workers' while offering support for various libraries and useful features, such as high-definition (HD) and high-quality (HQ) screenshots.
