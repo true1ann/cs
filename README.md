@@ -16,7 +16,7 @@ Creative Studio is a user-friendly tool designed for coding JavaScript web-based
   Easily switch workers and libraries on and off in seconds by toggling a boolean for each element.
 
 - **Library Support**  
-  Enjoy support for various utilities, including fontchanger.js.
+  Enjoy support for various libs. (Oh also JQuery 6.3.0 is included.)
 
 - **Real-Time Previewer**  
   Utilize the built-in previewer to see your changes in real-time. (Just remember to enable it!)
